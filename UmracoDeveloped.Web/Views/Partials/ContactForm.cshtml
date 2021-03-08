@@ -1,0 +1,68 @@
+﻿@using UmbracoDeveloped.Core.ViewModels;
+@using UmbracoDeveloped.Core.Controllers;
+@model ContactFormViewModel
+@{
+    Html.EnableClientValidation();
+    Html.EnableUnobtrusiveJavaScript();
+}
+@if ((string)TempData["status"] == "OK")
+{
+    <text>
+        <div class="container">
+            <div class="row">
+                <div class="col text-center p-5">
+                    <i class="far fa-5x fa-thumbs-up"></i>
+                    <div>
+                        Thanks for your comments.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </text>
+}
+else
+{
+    using (Html.BeginUmbracoForm<ContactController>("HandleContactForm"))
+    {
+        @Html.ValidationSummary()
+        @Html.AntiForgeryToken()
+        //name
+        <div class="form-group">
+            <label for="textbox-name">
+                Your name *
+            </label>
+            <span class="field-validation-valid" data-valmsg-for="Name" data-valmsg-replace="true"></span>
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control", maxlength = "80" })
+        </div>
+        //email
+        <div class="form-group">
+            <label for="textbox-email">
+                Your email *
+            </label>
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+            @Html.TextBoxFor(m => m.EmailAddress, new { @class = "form-control", maxlength = "255" })
+        </div>
+        //subject
+        <div class="form-group">
+            <label for="textbox-subject">
+                Subject of enquiry
+            </label>
+            <span class="field-validation-valid"></span>
+            @Html.TextBoxFor(m => m.Subject, new { @class = "form-control", maxlength = "255" })
+        </div>
+        //comments
+        <div class="form-group">
+            <label for="textbox-comments">
+                Comments
+            </label>
+            <span class="field-validation-valid" data-valmsg-for="Name" data-valmsg-replace="true"></span>
+            @Html.TextAreaFor(m => m.Comment, new { @class = "form-control", maxlength = "500" })
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-outline-primary btn-lg">
+                Send
+            </button>
+        </div>
+    }
+}

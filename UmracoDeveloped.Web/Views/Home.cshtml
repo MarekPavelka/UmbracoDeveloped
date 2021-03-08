@@ -1,0 +1,21 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage<ContentModels.Home>
+@using ContentModels = Umbraco.Web.PublishedModels;
+@{
+    Layout = "Main.cshtml";
+}
+@Html.Partial("Jumbo")
+@Html.Partial("Call To Action")
+<div class="container">
+    <div class="row">
+        <div class="col text-center mt-3">
+            @Html.Partial("LatestNews")
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col text-center mt-3">
+           @* @Umbraco.RenderMacro("GetLatestTweets", new {twitterHandle="elonmusk"})*@
+        </div>
+    </div>
+</div>

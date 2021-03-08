@@ -1,0 +1,5 @@
+﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
+@{
+    var twitterHandle = Model.MacroParameters["twitterHandle"] as string;
+}
+@Html.Action("GetTweets", "Twitter", new { twitterHandle = twitterHandle })

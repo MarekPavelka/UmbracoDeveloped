@@ -1,0 +1,58 @@
+﻿@using UmbracoDeveloped.Core.ViewModels;
+@using Newtonsoft.Json;
+@using System.Globalization;
+@model TwitterViewModel
+@{
+    dynamic json = JsonConvert.DeserializeObject(Model.Json);
+}
+
+<section class="container">
+    <div class="row">
+        <div class="col">
+            <div class="card-deck">
+                <h2>
+                    Latest tweets from @Model.TwitterHandle
+                </h2>
+                @foreach (var jToken in json)
+                {
+                    var createdDate = DateTime.ParseExact(jToken.created_at.ToString(), "ddd MMM dd HH:mm:ss +ffff yyyy", CultureInfo.InvariantCulture);
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between">
+                            <div>
+                                <div>
+                                    <strong>
+                                        Umbraco Developed
+                                    </strong><br />
+                                    @@@Model.TwitterHandle
+                                </div>
+                            </div>
+                            <div>
+                                <i class="fab fa-twitter fa-2x"></i>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            @jToken.full_text
+                        </div>
+                        <div class="card-footer d-flex justify-content-between">
+                            <a href="https://twitter.com/@Model.TwitterHandle/status/@jToken.id_str" class="stretched-link">
+                                Read More
+                            </a>
+                            @if (createdDate.Year == DateTime.Now.Year)
+                            {
+                                <text>
+                                    @Html.Raw(createdDate.ToString("d MMM")) <br />
+                                </text>
+                            }
+                            else
+                            {
+                                <text>
+                                    @Html.Raw(createdDate.ToString("d MMM yyyy")) <br />
+                                </text>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>

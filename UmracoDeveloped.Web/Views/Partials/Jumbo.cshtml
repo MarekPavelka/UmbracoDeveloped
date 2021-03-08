@@ -1,0 +1,35 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoViewPage
+@using Umbraco.Web.Models
+<style>
+    .homeHero {
+        background: no-repeat center center;
+        background-attachment: scroll;
+        position: relative;
+        background-size: cover;
+        color: white;
+    }
+
+        .homeHero > .overlay {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(82, 73, 53,0.80);
+            z-index: 1;
+        }
+
+    .homeHero > .inner {
+        position: relative;
+        z-index: 2;
+    }
+</style>
+<div class="jumbotron jumbotron-fluid homeHero" style="background-image:url('/images/hero_image.jpg')">
+    <div class="overlay"></div>
+    <div class="inner">
+        <div class="container">
+            <h1 class="display-4">@Model.Value("jumboTitle")</h1>
+            <p class="lead">@Model.Value("jumboSubtitle")</p>
+        </div>
+    </div>
+</div>
